@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多功能網頁切換器</title>
+    <style>
+        /* 基礎全螢幕設定 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* 隱藏外層捲軸 */
+        }
+
+        /* 上方或側邊選單列 */
+        .navbar {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7); /* 半透明黑 */
+            padding: 10px 20px;
+            border-radius: 30px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
+        }
+
+        /* 按鈕樣式 */
+        .nav-btn {
+            background: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Iframe 容器 */
+        .content-frame {
+            border: none;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <button class="nav-btn" onclick="changeSite('https://script.google.com/macros/s/AKfycbz2ZWKGHG_hga6H03E8h46PUAqMMty11d0g06j23g3i5gJnaaPIShzCQt07iQiDi4t-hA/exec')">網頁應用</button>
+        <button class="nav-btn" onclick="changeSite('https://www.bing.com')">Bing 搜尋</button>
+        <button class="nav-btn" onclick="changeSite('https://www.google.com')">google</button>
+    </div>
+
+    <iframe 
+        id="main-frame"
+        src="https://www.wikipedia.org" 
+        class="content-frame">
+    </iframe>
+
+    <script>
+        // 切換網址的簡易函式
+        function changeSite(url) {
+            document.getElementById('main-frame').src = url;
+        }
+    </script>
+
+</body>
+</html>
