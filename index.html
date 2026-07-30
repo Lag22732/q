@@ -3,90 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub 雲端控制台</title>
+    <title>雲端應用程式</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
-        h1 { font-size: 24px; color: #1a73e8; margin-bottom: 10px; }
-        p { font-size: 14px; color: #666; margin-bottom: 25px; }
-        .input-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #555; }
-        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; transition: border 0.3s; }
-        input:focus { border-color: #1a73e8; outline: none; }
-        button { width: 100%; padding: 12px; background-color: #1a73e8; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        button:hover { background-color: #1557b0; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
-        .response-box { margin-top: 25px; padding: 15px; border-radius: 6px; background-color: #f8f9fa; border-left: 4px solid #ddd; min-height: 50px; display: flex; align-items: center; justify-content: center; font-size: 14px; word-break: break-all; }
-        .success { border-left-color: #34a853; color: #202124; background-color: #e6f4ea; }
-        .error { border-left-color: #ea4335; color: #c5221f; background-color: #fce8e6; }
+        /* 徹底移除所有邊距，確保 100% 滿版 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+        /* 讓內嵌視窗填滿整個瀏覽器畫面 */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Google GAS 連線測試</h1>
-    <p>透過 GitHub Pages 免費發送資料至雲端</p>
-    
-    <div class="input-group">
-        <label for="userName">測試文字（例如您的名字）</label>
-        <input type="text" id="userName" placeholder="請輸入內容..." value="金城武">
-    </div>
-    
-    <button id="submitBtn">發送資料至 GAS</button>
-    
-    <div class="response-box" id="responseBox">
-        等待動作...
-    </div>
-</div>
-
-<script>
-    // ⚠️ 請在下方雙引號內，貼上您在 Google Apps Script 部署得到的 Web App 網址
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbwwZEVf2qsiKy5TEZfmlHtp094Z8HdDadZGti4Ayv6vS9h0taciGcVjT3TlX--wjryx/exec";
-
-    document.getElementById('submitBtn').addEventListener('click', async () => {
-        const nameInput = document.getElementById('userName').value.trim();
-        const responseBox = document.getElementById('responseBox');
-        const submitBtn = document.getElementById('submitBtn');
-
-        if (!nameInput) {
-            alert('請輸入測試文字！');
-            return;
-        }
-
-        // 切換按鈕與狀態盒為載入中
-        submitBtn.disabled = true;
-        submitBtn.innerText = '處理中，請稍候...';
-        responseBox.className = 'response-box';
-        responseBox.innerText = '正在連線至 Google 伺服器...';
-
-        try {
-            // 使用 GET 方式將參數帶給 GAS [1]
-            const targetUrl = `${GAS_URL}?name=${encodeURIComponent(nameInput)}`;
-            
-            const response = await fetch(targetUrl); [1]
-            
-            if (!response.ok) {
-                throw new Error(`伺服器回應錯誤: ${response.status}`);
-            }
-
-            const data = await response.json(); [1]
-            
-            // 成功接收資料
-            responseBox.className = 'response-box success';
-            responseBox.innerText = data.message || '連線成功，但 GAS 未回傳 message 欄位。';
-            
-        } catch (error) {
-            // 處理錯誤
-            responseBox.className = 'response-box error';
-            responseBox.innerText = '連線失敗！請檢查 GAS 網址是否正確，且權限是否設為「任何人」。\n原因：' + error.message;
-        } finally {
-            // 恢復按鈕狀態
-            submitBtn.disabled = false;
-            submitBtn.innerText = '發送資料至 GAS';
-        }
-    });
-</script>
+    <!-- ⚠️ 請將下方 src 的網址更換為您的 GAS 網頁應用程式網址 -->
+    <iframe src="https://script.google.com/macros/s/AKfycbwwZEVf2qsiKy5TEZfmlHtp094Z8HdDadZGti4Ayv6vS9h0taciGcVjT3TlX--wjryx/exec"></iframe>
 
 </body>
 </html>
