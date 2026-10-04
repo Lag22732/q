@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>刷題GitHub</title>
     <style>
-        /* 徹底移除所有邊距，確保 100% 滿版 */
         html, body {
             margin: 0;
             padding: 0;
@@ -13,11 +12,61 @@
             height: 100%;
             overflow: hidden;
             background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-        /* 讓內嵌視窗填滿整個瀏覽器畫面 */
+
+        /* 上方導覽列 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            flex-wrap: wrap;
+            min-height: 52px;
+            box-sizing: border-box;
+        }
+
+        .navbar a.home-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background-color: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
+
+        .navbar a.home-btn:hover {
+            background-color: #0b5ed7;
+        }
+
+        .nav-select {
+            padding: 6px 10px;
+            font-size: 14px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            background-color: white;
+            min-width: 140px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .nav-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+        }
+
+        /* iframe 填滿剩餘空間 */
         iframe {
             width: 100%;
-            height: 100%;
+            height: calc(100% - 52px);
             border: none;
             display: block;
         }
@@ -25,8 +74,88 @@
 </head>
 <body>
 
-    <!-- ⚠️ 請將下方 src 的網址更換為您的 GAS 網頁應用程式網址 -->
-    <iframe src="https://script.google.com/macros/s/AKfycbwwZEVf2qsiKy5TEZfmlHtp094Z8HdDadZGti4Ayv6vS9h0taciGcVjT3TlX--wjryx/exec"></iframe>
+    <!-- 上方導覽列 -->
+    <div class="navbar">
+        <!-- Home 按鈕 -->
+        <a href="#" class="home-btn" onclick="loadPage('https://script.google.com/macros/s/AKfycbyC-FoOX5omIcizE-DmBKHsqgMqP2W9oh3Rh781wVqVu1kNoUoKCP2KxKU2BwplhElpvw/exec'); return false;">
+            Home
+        </a>
+
+        <!-- 下拉選單 1 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">出題</option>
+            <option value="https://script.google.com/macros/s/AKfycbxhoYNvCfdsNcS_rQgLC3O1zNoE-QtZyIRtnUvyoUaocImkhzIkkJKxJEW4tiFuHx7j/exec">抽題(表單)</option>
+            <option value="https://script.google.com/macros/s/AKfycbzeZ_sYyRu7HAlsdVK85xM_mrgzKXngwTFExjnmJwRxvawyyoN8bAgtLbivlutA-heCyg/exec">刷題</option>
+            <option value=""></option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 2 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">Q1</option>
+            <option value="https://script.google.com/macros/s/AKfycbyJEuBsHUpA0UFcdWihuVyJfd_tZ4yJRom_-T0zOlQ-eY_ih7kCyOMqun2BW_Yj7rR7/exec">Q刷題(表單)</option>
+            <option value="https://script.google.com/macros/s/AKfycbwwZEVf2qsiKy5TEZfmlHtp094Z8HdDadZGti4Ayv6vS9h0taciGcVjT3TlX--wjryx/exec">Q抽題</option>
+            <option value=""></option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 3 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">Q2</option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 4 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">Q3</option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 5 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">Q4</option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 6 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">Q5</option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 7 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">測試1</option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 8 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">測試2</option>
+            <option value="https://script.google.com/macros/s/AKfycbzM1nODkkobH7dq8gnpsmwBkWrV0tg6Xh-uoeZGI_yjazipBHz50cFZ2s-zOZgv06OM/exec">成績_抽題(表單)</option>
+            <option value="https://script.google.com/macros/s/AKfycbwf6csZ2vUDHozigT8d1GPFZqwGFeTLKD8Mf_OgY3bCq_KGcZt-t4yRu6HNPecXtADpCw/exec">成績_刷題</option>
+            <option value=""></option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+        <!-- 下拉選單 9 -->
+        <select class="nav-select" onchange="if(this.value) loadPage(this.value); this.selectedIndex = 0;">
+            <option value="">share</option>
+            <option value="https://script.google.com/macros/s/AKfycbxsGdxP25Av6PW5YYHk9evPOd-Nw2LMiPKsQItKkKDRpdz9rox2-zkyHNYxGvzjchKmMw/exec">share01</option>
+            <option value=""></option>
+            <!-- 在此新增更多選項： <option value="網址">顯示名稱</option> -->
+        </select>
+
+    </div>
+
+    <!-- 主要內容區（iframe） -->
+    <iframe id="mainFrame" src="https://script.google.com/macros/s/AKfycbwwZEVf2qsiKy5TEZfmlHtp094Z8HdDadZGti4Ayv6vS9h0taciGcVjT3TlX--wjryx/exec"></iframe>
+
+    <script>
+        function loadPage(url) {
+            document.getElementById('mainFrame').src = url;
+        }
+    </script>
 
 </body>
 </html>
